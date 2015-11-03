@@ -55,14 +55,15 @@ class Car {
     } else {
       newStart = start + new Position(0, steps);
     }
-    return new Car(start: newStart, length:length, horizontal: horizontal);
+    return new Car(start: newStart, length: length, horizontal: horizontal);
   }
 
+  /// Represents the cars as placed in a [boardLength] x [boardLength] matrix.
   String toString() {
     String s = "\n";
-    for(int x = 0; x < boardLength; x++) {
+    for (int x = 0; x < boardLength; x++) {
       for (int y = 0; y < boardLength; y++) {
-        if (positions.contains(new Position(x,y))) {
+        if (positions.contains(new Position(x, y))) {
           s += "C ";
         } else {
           s += "X ";
@@ -72,5 +73,4 @@ class Car {
     }
     return s;
   }
-
 }

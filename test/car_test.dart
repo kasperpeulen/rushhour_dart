@@ -26,7 +26,7 @@ class CarTest implements TestCase {
 
   @test
   it_has_correct_positions() {
-    expect(car1.positions, [new Position(1,1), new Position(2,1)]);
+    expect(car1.positions, [new Position(1, 1), new Position(2, 1)]);
   }
 
   @test
@@ -42,6 +42,14 @@ class CarTest implements TestCase {
 
   @test
   it_can_be_represented_as_a_string() {
-    expect(car1.toString(), "a");
+    expect(
+        car1.toString(),
+        "\n"
+        "X X X X X X \n"
+        "X C X X X X \n"
+        "X C X X X X \n"
+        "X X X X X X \n"
+        "X X X X X X \n"
+        "X X X X X X \n");
   }
 }
