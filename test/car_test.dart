@@ -52,4 +52,19 @@ class CarTest implements TestCase {
         "X X X X X X \n"
         "X X X X X X \n");
   }
+
+  @test
+  it_can_be_valid() {
+    expect(car1.isValid(), isTrue);
+    expect(car2.isValid(), isTrue);
+  }
+
+  @test
+  it_can_be_inValid() {
+    Car invalidCar =
+        new Car(start: new Position(5, 5), length: 2, horizontal: true);
+
+    expect(invalidCar.isValid(), isFalse);
+    expect(car2.move(5).isValid(), isFalse);
+  }
 }

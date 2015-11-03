@@ -10,7 +10,12 @@ main() {
 
   print(car1);
 
-  Car newCar = car1.move(2);
+  Car newCar1 = car1.move(2);
 
-  print(newCar);
+  print(newCar1);
+
+  Car newCar2 = car2.move(5);
+
+  print(car1.isValid());
+  print(newCar2.isValid());
 }

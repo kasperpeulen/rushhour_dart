@@ -58,6 +58,11 @@ class Car {
     return new Car(start: newStart, length: length, horizontal: horizontal);
   }
 
+  bool isValid() => start.x >= 0 &&
+      start.y >= 0 &&
+      end.x < boardLength &&
+      end.y < boardLength;
+
   /// Represents the cars as placed in a [boardLength] x [boardLength] matrix.
   String toString() {
     String s = "\n";
