@@ -20,7 +20,11 @@ class Car {
   int length;
 
   /// Constructs a new instance of the Car class.
-  Car({this.start, this.horizontal, this.length});
+  Car({this.start, this.horizontal, this.length}) {
+    if (length > 3 || length < 2) {
+      throw 'Car must be of length 2 or 3.';
+    }
+  }
 
   /// Represent the end position of the car.
   ///

@@ -67,4 +67,11 @@ class CarTest implements TestCase {
     expect(invalidCar.isValid(), isFalse);
     expect(car2.move(5).isValid(), isFalse);
   }
+
+  @test
+  length_must_be_2_or_3() {
+    expect(() => new Car(start: new Position(0,0), length: 4, horizontal: true),
+    throwsA('Car must be of length 2 or 3.')
+    );
+  }
 }
