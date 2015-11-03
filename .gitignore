@@ -1,0 +1,9 @@
+### Dart template
+.pub/
+packages
+.packages
+pubspec.lock
+
+### JetBrains template
+*.iml
+.idea/
