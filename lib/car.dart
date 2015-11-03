@@ -13,7 +13,7 @@ class Car {
 
   /// True if the car is horizontally placed on the board.
   ///
-  /// If false, the caris vertically placed on the board.
+  /// If false, the car is vertically placed on the board.
   bool horizontal;
 
   /// The length of the car. The length can be either 2 (a car) or 3 (a truck).
