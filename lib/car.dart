@@ -34,8 +34,20 @@ class Car {
     }
   }
 
+  List<Position> get positions {
+    if (length == 2) {
+      return [start, end];
+    } else {
+      if (horizontal) {
+        return [start, start + new Position(1, 0), end];
+      } else {
+        return [start, start + new Position(0, 1), end];
+      }
+    }
+  }
+
   /// Creates a new instance of a Car that is moved a number of [steps],
-  /// relalative to the current instance of the Car.
+  /// relative to the current instance of the Car.
   Car move(int steps) {
     var newStart;
     if (horizontal) {
@@ -45,4 +57,20 @@ class Car {
     }
     return new Car(start: newStart, length:length, horizontal: horizontal);
   }
+
+  String toString() {
+    String s = "\n";
+    for(int x = 0; x < boardLength; x++) {
+      for (int y = 0; y < boardLength; y++) {
+        if (positions.contains(new Position(x,y))) {
+          s += "C ";
+        } else {
+          s += "X ";
+        }
+      }
+      s += "\n";
+    }
+    return s;
+  }
+
 }
