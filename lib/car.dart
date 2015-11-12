@@ -3,6 +3,7 @@ library rushour.car;
 import 'package:rushhour/position.dart';
 import 'package:rushhour/common.dart';
 import 'dart:collection';
+import 'package:quiver/core.dart';
 
 class Car {
   static int boardWidth = 6;
@@ -47,7 +48,7 @@ class Car {
     var positions;
 
     if (length == 2) {
-      positions = new List.unmodifiable([start, end]);
+      positions = [start, end];
     } else {
       if (horizontal) {
         positions = [start, start + new Position(1, 0), end];
@@ -56,13 +57,12 @@ class Car {
       }
     }
 
-    int hashCode = szudzikPair(start.hashCode, end.hashCode);
-
-    return cache[hashCode] ??=
-        new Car._(start, horizontal, length, end, positions);
+    return cache[hashh(start, end)] ??=
+        new Car._(start, horizontal, length, end, positions, hash2(start, end));
   }
 
-  Car._(this.start, this.horizontal, this.length, this.end, this.positions);
+  Car._(this.start, this.horizontal, this.length, this.end, this.positions,
+      this.hashCode);
 
   /// Creates a new instance of a Car that is moved a number of [steps],
   /// relative to the current instance of the Car.
@@ -76,7 +76,7 @@ class Car {
     return new Car(start: newStart, length: length, horizontal: horizontal);
   }
 
-  bool clashesWidth(Car otherCar) {
+  bool clashesWith(Car otherCar) {
     final otherStart = otherCar.start;
     final otherEnd = otherCar.end;
 
@@ -86,28 +86,35 @@ class Car {
         start.y <= otherEnd.y;
   }
 
-  bool clashesWithAnyOf(List<Car> otherCars) {
-    return otherCars.any((c) => clashesWidth(c));
+  bool clashesWithAnyOf(self, List<Car> otherCars) {
+    return otherCars.any((c) => c != self && clashesWith(c));
   }
 
   List<Car> nextCars(List<Car> otherCars) {
-    otherCars = new List.from(otherCars)..remove(this);
     List<Car> newCars = [];
     Car newCar = move(1);
-    while (newCar != null && !newCar.clashesWithAnyOf(otherCars)) {
+    if (newCar != null && !newCar.clashesWithAnyOf(this, otherCars)) {
       newCars.add(newCar);
       newCar = newCar.move(1);
     }
 
     newCar = move(-1);
-    while (newCar != null && !newCar.clashesWithAnyOf(otherCars)) {
+    if (newCar != null && !newCar.clashesWithAnyOf(this, otherCars)) {
       newCars.add(newCar);
       newCar = newCar.move(-1);
     }
     return newCars;
   }
 
-  int get hashCode => szudzikPair(start.hashCode, end.hashCode);
+  int hashCode;
+
+  static int hashh(start, end) {
+    int power = Car.boardWidth;
+    return start.x +
+        start.y * power +
+        end.x * power * power +
+        end.y * power * power * power;
+  }
 
   /// Represents the cars as placed in a [boardLength] x [boardLength] matrix.
   String toString() {

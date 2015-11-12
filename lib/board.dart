@@ -14,7 +14,7 @@ class Board {
   final Goal goal;
 
   Board({cars, this.goal})
-      : cars = new List.unmodifiable(cars),
+      : cars = cars,
         previous = null;
 
   Board.fromBoard(Board previous, cars)
@@ -48,7 +48,7 @@ class Board {
   }
 
   List<List<String>> get matrix {
-    return makeMatrix(Car.boardWidth, Car.boardHeight, (i, j) {
+    return makeMatrix(Car.boardWidth, Car.boardHeight, (j, i) {
       for (Car car in cars) {
         if (car.positions.contains(new Position(i, j))) {
           if (cars.indexOf(car) == 0) {
@@ -69,9 +69,9 @@ class Board {
 
   toString() {
     var s = "\n";
-    for (int j in new Iterable.generate(Car.boardHeight)) {
-      for (int i in new Iterable.generate(Car.boardWidth)) {
-        s += matrix[j][i] + ' ';
+    for (int y in range(Car.boardHeight)) {
+      for (int x in range(Car.boardWidth)) {
+        s += matrix[x][y] + ' ';
       }
       s += '\n';
     }
