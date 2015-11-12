@@ -9,3 +9,7 @@ dependencies:
   test: ^0.12.5+1
   testcase: ^0.1.0
   collection: '^1.1.3'
+  quiver: any
+  collection: any
+  range: any
+  benchmark_harness: any

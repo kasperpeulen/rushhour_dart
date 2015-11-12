@@ -17,6 +17,9 @@ class PositionTest implements TestCase {
   tearDown() {}
 
   @test
+
+
+  @test
   positions_can_be_equal() {
     expect(pos1, pos3);
   }
