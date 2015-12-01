@@ -1,9 +1,10 @@
 library rushour.car;
 
 import 'package:rushhour/position.dart';
-import 'package:rushhour/common.dart';
 import 'dart:collection';
 import 'package:quiver/core.dart';
+import 'package:range/range.dart' hide Range;
+import 'package:rushhour/board.dart';
 
 class Car {
   static int boardWidth = 6;
@@ -45,7 +46,7 @@ class Car {
       return null;
     }
 
-    var positions;
+    List<Position> positions;
 
     if (length == 2) {
       positions = [start, end];
@@ -64,6 +65,9 @@ class Car {
   Car._(this.start, this.horizontal, this.length, this.end, this.positions,
       this.hashCode);
 
+  int get variable => horizontal ? start.x : start.y;
+
+  int get fixed => horizontal ? start.y : start.x;
   /// Creates a new instance of a Car that is moved a number of [steps],
   /// relative to the current instance of the Car.
   Car move(int steps) {
@@ -86,25 +90,38 @@ class Car {
         start.y <= otherEnd.y;
   }
 
-  bool clashesWithAnyOf(self, List<Car> otherCars) {
+  bool clashesWithRange(PositionRange range) {
+    return end.x >= range.x.begin &&
+        start.x <= range.x.end &&
+        end.y >= range.y.begin &&
+        start.y <= range.y.end;
+  }
+
+  List<Car> clashesWithCars(Car self, List<Car> cars) {
+    return cars.where((Car c) => clashesWith(c) && c != self).toList();
+  }
+
+  bool clashesWithAnyOf(Car self, List<Car> otherCars) {
     return otherCars.any((c) => c != self && clashesWith(c));
   }
 
-  List<Car> nextCars(List<Car> otherCars) {
-    List<Car> newCars = [];
+  Iterable<Car> nextCars(List<Car> otherCars) sync* {
+//    List<Car> newCars = [];
     Car newCar = move(1);
     if (newCar != null && !newCar.clashesWithAnyOf(this, otherCars)) {
-      newCars.add(newCar);
+      yield (newCar);
       newCar = newCar.move(1);
     }
 
     newCar = move(-1);
     if (newCar != null && !newCar.clashesWithAnyOf(this, otherCars)) {
-      newCars.add(newCar);
+      yield (newCar);
       newCar = newCar.move(-1);
     }
-    return newCars;
+//    return newCars;
   }
+
+
 
   int hashCode;
 
@@ -131,4 +148,55 @@ class Car {
     }
     return s;
   }
+
 }
+
+
+
+
+
+class PositionRange {
+  Range x;
+  Range y;
+
+  PositionRange(this.x, this.y);
+
+  PositionRange.fromGoal(Goal goal) :
+      x = new Range(goal.begin.x, goal.end.x),
+      y = new Range(goal.begin.y, goal.end.y);
+
+  carsToMoveToAchieveGoal(List<Car> otherCars) {
+
+  }
+}
+
+class Range {
+  int end;
+  int begin;
+
+  Range(this.begin, this.end);
+
+  List<int> get list => range(end, begin).toList();
+
+  String toString() => '($begin, $end)';
+}
+
+
+class Moves {
+  int index;
+  List backwards;
+  List forwards;
+
+  Moves(this.backwards, this.forwards);
+
+  List<int> get all {
+    List<int> all = ([]..addAll(backwards)..addAll(forwards)) as List<int>;
+    all.sort((a,b) => a.abs().compareTo(b.abs()));
+    return all;
+  }
+
+  int get best => all.first;
+
+  String toString() => all.toString();
+}
+

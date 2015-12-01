@@ -1,8 +1,8 @@
-import 'package:testcase/testcase.dart';
-export 'package:testcase/init.dart';
+import 'packages/testcase/testcase.dart';
+export 'packages/testcase/init.dart';
 
-import 'package:rushhour/position.dart';
-import 'package:rushhour/car.dart';
+import 'position.dart';
+import 'car.dart';
 
 //class CarTest implements TestCase {
 //  Car car1 = new Car(start: new Position(1, 1), length: 2, horizontal: true);

@@ -22,6 +22,6 @@ class Position {
 
   static int hash(x,y) => x + Car.boardWidth + Car.boardWidth * 4 * y;
 
-  toString() => '($x, $y)';
+  String toString() => '($x, $y)';
 }
 

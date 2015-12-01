@@ -13,3 +13,4 @@ dependencies:
   collection: any
   range: any
   benchmark_harness: any
+  browser: '^0.10.0+2'

@@ -8,7 +8,7 @@ final easyGame = new Board(cars: [
   new Car(length: 3, horizontal: false, start: new Position(4, 0)),
   new Car(length: 2, horizontal: false, start: new Position(3, 3)),
   new Car(length: 2, horizontal: true, start: new Position(4, 4)),
-], goal: new Goal(0, new Position(5, 2)));
+], goal: new Position(5, 2));
 
 
 final hardestGame = new Board(cars: [
@@ -25,7 +25,7 @@ final hardestGame = new Board(cars: [
   new Car(length: 2, horizontal: true, start: new Position(4, 4)),
   new Car(length: 2, horizontal: true, start: new Position(2, 5)),
   new Car(length: 2, horizontal: true, start: new Position(4, 5)),
-], goal: new Goal(0,  new Position(5, 2)));
+], goal: new Position(5, 2));
 
 
 final game2 = new Board(cars: [
@@ -42,7 +42,7 @@ final game2 = new Board(cars: [
   new Car(length: 2, horizontal: false, start: new Position(3, 4)),
   new Car(length: 2, horizontal: true, start: new Position(4, 4)),
   new Car(length: 2, horizontal: true, start: new Position(4, 5)),
-], goal: new Goal(0,  new Position(5, 2)));
+], goal: new Position(5, 2));
 
 final Board game7 = new Board(cars: [
   new Car(length: 2, horizontal: true, start: new Position(2, 5)),
@@ -89,7 +89,7 @@ final Board game7 = new Board(cars: [
   new Car(length: 2, horizontal: false, start: new Position(11, 1)),
   new Car(length: 2, horizontal: false, start: new Position(11, 8)),
   new Car(length: 2, horizontal: false, start: new Position(11, 10)),
-], goal: new Goal(0,  new Position(11, 5)));
+], goal: new Position(11, 5));
 
 //final Board game7pre = new Board(cars: [
 //  new Car(length: 2, horizontal: true, start: new Position(2, 5), isRedCar: true),
@@ -212,7 +212,7 @@ final Board game4 = new Board(cars: [
   new Car(length: 3, horizontal: true, start: new Position(1, 8)),
   new Car(length: 2, horizontal: true, start: new Position(5, 8)),
   new Car(length: 2, horizontal: true, start: new Position(7, 8)),
-], goal: new Goal(0,  new Position(8, 4)));
+], goal: new Position(8, 4));
 
 //Board gameApp = new Board(cars: [
 //  new Car(length: 2, horizontal: true, start: new Position(4, 2), isRedCar: true),

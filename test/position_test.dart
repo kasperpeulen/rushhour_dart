@@ -1,7 +1,7 @@
-import 'package:testcase/testcase.dart';
-export 'package:testcase/init.dart';
+import 'packages/testcase/testcase.dart';
+export 'packages/testcase/init.dart';
 
-import 'package:rushhour/position.dart';
+import 'position.dart';
 
 class PositionTest implements TestCase {
   Position pos1;
